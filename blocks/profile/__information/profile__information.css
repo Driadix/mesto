@@ -1,0 +1,16 @@
+.profile__information {
+  width: 62.5%;
+}
+
+@media screen and (max-width: 680px) {
+  .profile__information {
+    margin: 26px 0 36px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile__information {
+    margin: 26px 0 36px;
+    width: auto;
+  }
+}
