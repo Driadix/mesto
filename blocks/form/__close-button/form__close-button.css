@@ -1,0 +1,18 @@
+.form__close-button {
+  background: url('../../../images/close-icon.svg') center no-repeat;
+
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: translate(40px, -40px);
+}
+
+@media screen and (max-width: 560px) {
+  .form__close-button {
+    transform: translate(0, -40px);
+  }
+}
