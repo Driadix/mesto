@@ -1,0 +1,20 @@
+.header__logo {
+  background: url('../../../images/header__logo.svg') no-repeat center;
+
+  width: 142px;
+  height: 33px;
+}
+
+@media screen and (max-width: 980px) {
+  .header__logo {
+    margin-left: 27px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .header__logo {
+    width: 104px;
+    height: 24px;
+    background: url('../../../images/header__logo-mobile.png') no-repeat center;
+  }
+}
