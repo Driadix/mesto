@@ -1,0 +1,11 @@
+.element__text-box {
+  width: 87.234%;
+
+  margin: 0 auto;
+  padding: 8.262% 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+}

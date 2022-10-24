@@ -1,0 +1,10 @@
+.element__image {
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+
+  background: #C4C4C4;
+
+  border-radius: 10px 10px 0px 0px;
+}
