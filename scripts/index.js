@@ -5,7 +5,7 @@ const editPopup = document.querySelector('.popup_type_edit');
 const editFormElement = editPopup.querySelector('.form_type_edit');
 const editNameInput = editFormElement.querySelector('.form__name-input');
 const editJobInput = editFormElement.querySelector('.form__job-input');
-const editCloseButton = editFormElement.querySelector('.form__close-button');
+const editCloseButton = editPopup.querySelector('.popup__close-button');
 
 function openPopup() {
   editPopup.classList.add('popup_opened');

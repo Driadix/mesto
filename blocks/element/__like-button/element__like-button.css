@@ -5,7 +5,7 @@
   flex: none;
 
   background: url('../../../images/like-button.svg') center no-repeat;
-  background-size: 22px 19px;
+  background-size: cover;
 }
 
 .element__like-button:hover {
