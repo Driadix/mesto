@@ -1,0 +1,6 @@
+@media screen and (max-width: 980px) {
+  .container_place_header {
+    max-width: 100%;
+    margin: 0;
+  }
+}
