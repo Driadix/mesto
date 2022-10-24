@@ -1,5 +1,6 @@
 .profile__information {
-  width: 62.5%;
+  max-width: 62.5%;
+  width: 100%;
 }
 
 @media screen and (max-width: 680px) {
