@@ -3,8 +3,7 @@
   width: 100vw;
   height: 100vh;
 
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   top: 0;
   left: 0;

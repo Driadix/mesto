@@ -4,6 +4,8 @@
 
   box-sizing: border-box;
 
+  margin: 195px auto 0;
+
   padding: 34px 36px 37px;
 
   background: #FFFFFF;
@@ -19,7 +21,7 @@
   .popup__container {
     width: 282px;
     min-height: 322px;
-
+    margin-top: 123px;
     padding: 25px 22px;
   }
 }
