@@ -23,6 +23,7 @@
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/elements/__list/elements__list.css');
 @import url('../blocks/element/element.css');
+@import url('../blocks/element/__image-container/element__image-container.css');
 @import url('../blocks/element/__image/element__image.css');
 @import url('../blocks/element/__text-box/element__text-box.css');
 @import url('../blocks/element/__text/element__text.css');
