@@ -1,27 +1,26 @@
+const closeButtonList = document.querySelectorAll('.popup__close-button');
+
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__job');
 
-const editButton = document.querySelector('.profile__edit-button');
-const editPopup = document.querySelector('.popup_type_edit');
-const editFormElement = editPopup.querySelector('.form_type_edit');
-const editNameInput = editFormElement.querySelector('.form__name-input');
-const editJobInput = editFormElement.querySelector('.form__job-input');
-const closeButton = document.querySelectorAll('.popup__close-button');
+const profileButton = document.querySelector('.profile__edit-button');
+const profilePopup = document.querySelector('.popup_type_edit');
+const profileFormElement = profilePopup.querySelector('.form_type_edit');
+const profileNameInput = profileFormElement.querySelector('.form__name-input');
+const profileJobInput = profileFormElement.querySelector('.form__job-input');
 
-const addButton = document.querySelector('.profile__add-button');
-const addPopup = document.querySelector('.popup_type_new-place');
-const addFormElement = addPopup.querySelector('.form_type_new-place');
-const addNameInput = addFormElement.querySelector('.form__name-input');
-const addLinkInput = addFormElement.querySelector('.form__job-input');
+const additionButton = document.querySelector('.profile__add-button');
+const additionPopup = document.querySelector('.popup_type_new-place');
+const additionFormElement = additionPopup.querySelector('.form_type_new-place');
+const additionNameInput = additionFormElement.querySelector('.form__name-input');
+const additionLinkInput = additionFormElement.querySelector('.form__job-input');
 
 const imagePopup = document.querySelector('.popup_type-image');
 const imageBody = imagePopup.querySelector('.popup__image');
 const imageCaption = imagePopup.querySelector('.popup__image-caption');
 
 const elementTemplate = document.querySelector('#element__template').content.querySelector('.element');
-const elementsList = document.querySelector('.elements__list');
-
-const log = console.log;
+const elementsContainer = document.querySelector('.elements__list');
 
 const initialElements = [
   {
@@ -51,7 +50,7 @@ const initialElements = [
 ];
 
 function addElement(elementInfo) {
-  elementsList.prepend(renderElement(elementInfo));
+  elementsContainer.prepend(renderElement(elementInfo));
 }
 
 function renderElement(elementInfo) {
@@ -67,7 +66,7 @@ function renderElement(elementInfo) {
 
   image.addEventListener('click', () => {
     openPopup(imagePopup);
-    renderImage({ name: `${text.textContent}`, link: `${image.src}` });
+    renderImage(elementInfo);
   });
   likeButton.addEventListener('click', () => likeButton.classList.toggle('element__like-button_active'));
   deleteButton.addEventListener('click', () => newElement.remove());
@@ -83,47 +82,54 @@ function renderImage(imageInfo) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  switch (popup) {
-    case editPopup:
-      editNameInput.value = profileName.textContent;
-      editJobInput.value = profileJob.textContent;
-      break;
-    case addPopup:
-      addNameInput.value = "";
-      addLinkInput.value = "";
-      break;
-  }
+}
+
+function openProfilePopup(popup) {
+  popup.classList.add('popup_opened');
+  profileNameInput.value = profileName.textContent;
+  profileJobInput.value = profileJob.textContent;
+}
+
+function resetPopup(popup) {
+  const childFormElement = popup.querySelector('.form');
+  childFormElement.reset();
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  switch (evt.currentTarget) {
-    case editFormElement:
-      const editName = editNameInput.value;
-      const editJob = editJobInput.value;
-      profileName.textContent = editName;
-      profileJob.textContent = editJob;
-      break;
-    case addFormElement:
-      const placeName = addNameInput.value;
-      const placeLink = addLinkInput.value;
-      addElement({ name: `${placeName}`, link: `${placeLink}` });
-      break;
-  }
-  closePopup(evt.currentTarget.parentNode.parentNode);
+
+  const editName = profileNameInput.value;
+  const editJob = profileJobInput.value;
+  profileName.textContent = editName;
+  profileJob.textContent = editJob;
+
+  closePopup(evt.currentTarget.closest('.popup'));
+}
+
+function handleAdditionFormSubmit(evt) {
+  evt.preventDefault();
+
+  const placeName = additionNameInput.value;
+  const placeLink = additionLinkInput.value;
+  addElement({ name: `${placeName}`, link: `${placeLink}` });
+
+  closePopup(evt.currentTarget.closest('.popup'));
 }
 
 initialElements.forEach(elementInfo => {
   addElement(elementInfo);
 })
 
-editFormElement.addEventListener('submit', formSubmitHandler);
-addFormElement.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', () => openPopup(editPopup));
-addButton.addEventListener('click', () => openPopup(addPopup));
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+additionFormElement.addEventListener('submit', handleAdditionFormSubmit);
+profileButton.addEventListener('click', () => openProfilePopup(profilePopup));
+additionButton.addEventListener('click', () => {
+  resetPopup(additionPopup);
+  openPopup(additionPopup);
+});
 
-closeButton.forEach(btn => btn.addEventListener('click', () => closePopup(btn.parentNode.parentNode)));
+closeButtonList.forEach(btn => btn.addEventListener('click', () => closePopup(btn.closest('.popup'))));
