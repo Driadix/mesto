@@ -1,18 +1,28 @@
+const validationConfig = {
+  formSelector: '.form',
+  formFieldSet: '.form__fieldset',
+  inputSelector: '.input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_disabled',
+  inputErrorClass: 'input_type_error',
+  errorClass: 'input__error_visible'
+};
+
 function enableValidation() {
-  formList = Array.from(document.querySelectorAll('.form'));
+  formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
 
   formList.forEach(form => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    const formFieldsList = Array.from(form.querySelectorAll('.form__fieldset'));
+    const formFieldsList = Array.from(form.querySelectorAll(validationConfig.formFieldSet));
     formFieldsList.forEach(fieldSet => setEventListeners(fieldSet));
   });
 }
 
 function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.input'));
-  const buttonElement = formElement.querySelector('.form__save-button');
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement);
 
@@ -27,11 +37,11 @@ function setEventListeners(formElement) {
 
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('form__save-button_disabled');
+    buttonElement.classList.add(validationConfig.inactiveButtonClass);
     buttonElement.disabled = true;
   }
   else {
-    buttonElement.classList.remove('form__save-button_disabled');
+    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 }
@@ -50,17 +60,17 @@ function checkInputValidity(formElement, input) {
 }
 
 function showInputError(formElement, input, errorMessage) {
-  input.classList.add('input_type_error');
+  input.classList.add(validationConfig.inputErrorClass);
   const errorElement = formElement.querySelector(`.${input.id}-error`);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('input__error_visible');
+  errorElement.classList.add(validationConfig.errorClass);
 }
 
 function hideInputError(formElement, input) {
-  input.classList.remove('input_type_error');
+  input.classList.remove(validationConfig.inputErrorClass);
   const errorElement = formElement.querySelector(`.${input.id}-error`);
   errorElement.textContent = "";
-  errorElement.classList.remove('input__error_visible');
+  errorElement.classList.remove(validationConfig.errorClass);
 }
 
 enableValidation();
