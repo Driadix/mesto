@@ -1,0 +1,10 @@
+.input__error {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: #FF0000;
+  min-height: 30px;
+  padding-top: 5px;
+  visibility: hidden;
+}

@@ -1,4 +1,5 @@
 const closeButtonList = document.querySelectorAll('.popup__close-button');
+const popupList = document.querySelectorAll('.popup');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__job');
@@ -21,33 +22,6 @@ const imageCaption = imagePopup.querySelector('.popup__image-caption');
 
 const elementTemplate = document.querySelector('#element__template').content.querySelector('.element');
 const elementsContainer = document.querySelector('.elements__list');
-
-const initialElements = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 function addElement(elementInfo) {
   elementsContainer.prepend(renderElement(elementInfo));
@@ -82,10 +56,21 @@ function renderImage(imageInfo) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  // document.addEventListener('keydown', handleCloseEsc);
+}
+
+function resetErrors(form) {
+  const formInputs = Array.from(form.querySelectorAll('.input'));
+  formInputs.forEach(input => {
+    input.classList.remove('input_type_error');
+    const errorElement = form.querySelector(`.${input.id}-error`);
+    errorElement.textContent = "";
+    errorElement.classList.remove('input__error_visible');
+  });
 }
 
 function openProfilePopup(popup) {
-  popup.classList.add('popup_opened');
+  openPopup(popup);
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
 }
@@ -97,6 +82,7 @@ function resetPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  // document.removeEventListener('keydown', handleCloseEsc);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -126,10 +112,29 @@ initialElements.forEach(elementInfo => {
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 additionFormElement.addEventListener('submit', handleAdditionFormSubmit);
-profileButton.addEventListener('click', () => openProfilePopup(profilePopup));
+profileButton.addEventListener('click', () => {
+  openProfilePopup(profilePopup);
+  resetErrors(profilePopup.querySelector('.form'));
+});
 additionButton.addEventListener('click', () => {
   resetPopup(additionPopup);
+  resetErrors(additionPopup.querySelector('.form'));
   openPopup(additionPopup);
 });
 
+
+
 closeButtonList.forEach(btn => btn.addEventListener('click', () => closePopup(btn.closest('.popup'))));
+popupList.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(evt.target);
+    }
+  });
+  document.addEventListener('keydown', evt => {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+}
+);
