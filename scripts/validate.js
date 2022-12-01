@@ -5,7 +5,7 @@ const validationConfig = {
   submitButtonSelector: '.form__save-button',
   inactiveButtonClass: 'form__save-button_disabled',
   inputErrorClass: 'input_type_error',
-  errorClass: 'input__error_visible'
+  errorClass: 'input-error_visible'
 };
 
 function enableValidation() {
