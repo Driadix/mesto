@@ -109,11 +109,12 @@ profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 additionFormElement.addEventListener('submit', handleAdditionFormSubmit);
 profileButton.addEventListener('click', () => {
   openProfilePopup(profilePopup);
-  resetErrors(profileFormElement);
+  resetErrors(profileFormElement, validationConfig);
 });
 additionButton.addEventListener('click', () => {
   resetPopup(additionPopup);
-  resetErrors(additionFormElement);
+  resetErrors(additionFormElement, validationConfig);
+  disableButton(additionPopup.querySelector('.form__save-button'), validationConfig.inactiveButtonClass);
   openPopup(additionPopup);
 });
 
