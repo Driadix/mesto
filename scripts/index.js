@@ -111,7 +111,7 @@ profileButton.addEventListener('click', () => {
   openProfilePopup(profilePopup);
   resetErrors(profileFormElement, validationConfig);
 });
-additionButton.addEventListener('click', () => {
+additionButton.addEventListener('click', (evt) => {
   resetPopup(additionPopup);
   resetErrors(additionFormElement, validationConfig);
   disableButton(additionPopup.querySelector('.form__save-button'), validationConfig.inactiveButtonClass);
