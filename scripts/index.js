@@ -1,5 +1,8 @@
+import { initialElements, validationConfig } from './data.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
+const formList = document.querySelectorAll('.form');
 const popupList = document.querySelectorAll('.popup');
 
 const profileName = document.querySelector('.profile__title');
@@ -101,12 +104,12 @@ profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 additionFormElement.addEventListener('submit', handleAdditionFormSubmit);
 profileButton.addEventListener('click', () => {
   openProfilePopup(profilePopup);
-  resetErrors(profileFormElement, validationConfig);
+  // resetErrors(profileFormElement, validationConfig);
 });
 additionButton.addEventListener('click', () => {
   resetPopup(additionPopup);
-  resetErrors(additionFormElement, validationConfig);
-  disableButton(additionPopup.querySelector('.form__save-button'), validationConfig.inactiveButtonClass);
+  // resetErrors(additionFormElement, validationConfig);
+  // disableButton(additionPopup.querySelector('.form__save-button'), validationConfig.inactiveButtonClass);
   openPopup(additionPopup);
 });
 
@@ -117,4 +120,9 @@ popupList.forEach(popup => {
       closePopup(popup);
     }
   });
+});
+
+formList.forEach(form => {
+  const formValidator = new FormValidator(validationConfig, form);
+  formValidator.enableValidation();
 });
