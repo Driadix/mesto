@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const popupList = document.querySelectorAll('.popup');
 
 const profileName = document.querySelector('.profile__title');
@@ -19,38 +21,28 @@ const imagePopup = document.querySelector('.popup_type-image');
 const imageBody = imagePopup.querySelector('.popup__image');
 const imageCaption = imagePopup.querySelector('.popup__image-caption');
 
-const elementTemplate = document.querySelector('#element__template').content.querySelector('.element');
 const elementsContainer = document.querySelector('.elements__list');
+
 
 function addElement(elementInfo) {
   elementsContainer.prepend(renderElement(elementInfo));
 }
 
 function renderElement(elementInfo) {
-  const newElement = elementTemplate.cloneNode(true);
-  const text = newElement.querySelector('.element__text');
-  const image = newElement.querySelector('.element__image');
-  const likingButton = newElement.querySelector('.element__like-button');
-  const deletionButton = newElement.querySelector('.element__delete-button');
-
-  text.textContent = elementInfo.name;
-  image.src = elementInfo.link;
-  image.alt = elementInfo.name;
-
-  image.addEventListener('click', () => {
-    openPopup(imagePopup);
-    renderImage(elementInfo);
-  });
-  likingButton.addEventListener('click', () => likingButton.classList.toggle('element__like-button_active'));
-  deletionButton.addEventListener('click', () => newElement.remove());
-
-  return newElement;
+  const card = new Card(elementInfo, '.element__template', handleImageClick);
+  const cardElement = card.generateCard();
+  elementsContainer.prepend(cardElement);
 }
 
-function renderImage(imageInfo) {
-  imageCaption.textContent = imageInfo.name;
-  imageBody.src = imageInfo.link;
-  imageBody.alt = imageInfo.name;
+function renderImage(name, link) {
+  imageCaption.textContent = name;
+  imageBody.src = link;
+  imageBody.alt = `Изображение "${name}"`;
+}
+
+function handleImageClick(name, link) {
+  renderImage(name, link);
+  openPopup(imagePopup);
 }
 
 function openPopup(popup) {
@@ -96,13 +88,13 @@ function handleAdditionFormSubmit(evt) {
 
   const placeName = additionNameInput.value;
   const placeLink = additionLinkInput.value;
-  addElement({ name: `${placeName}`, link: `${placeLink}` });
+  renderElement({ name: `${placeName}`, link: `${placeLink}` });
 
   closePopup(evt.currentTarget.closest('.popup'));
 }
 
 initialElements.forEach(elementInfo => {
-  addElement(elementInfo);
+  renderElement(elementInfo);
 });
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
