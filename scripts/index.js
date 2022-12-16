@@ -26,14 +26,14 @@ const imageCaption = imagePopup.querySelector('.popup__image-caption');
 const elementsContainer = document.querySelector('.elements__list');
 
 
-function addElement(elementInfo) {
-  elementsContainer.prepend(renderElement(elementInfo));
+function renderCard(elementInfo, elementsContainer) {
+  elementsContainer.prepend(createCard(elementInfo));
 }
 
-function renderElement(elementInfo) {
+function createCard(elementInfo) {
   const card = new Card(elementInfo, '.element__template', handleImageClick);
   const cardElement = card.generateCard();
-  elementsContainer.prepend(cardElement);
+  return cardElement;
 }
 
 function renderImage(name, link) {
@@ -82,7 +82,7 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = profilePopupName;
   profileJob.textContent = profilePopupJob;
 
-  closePopup(evt.currentTarget.closest('.popup'));
+  closePopup(profilePopup);
 }
 
 function handleAdditionFormSubmit(evt) {
@@ -90,13 +90,13 @@ function handleAdditionFormSubmit(evt) {
 
   const placeName = additionNameInput.value;
   const placeLink = additionLinkInput.value;
-  renderElement({ name: `${placeName}`, link: `${placeLink}` });
+  renderCard({ name: `${placeName}`, link: `${placeLink}` }, elementsContainer);
 
-  closePopup(evt.currentTarget.closest('.popup'));
+  closePopup(additionPopup);
 }
 
 initialElements.forEach(elementInfo => {
-  renderElement(elementInfo);
+  renderCard(elementInfo, elementsContainer);
 });
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
@@ -107,8 +107,8 @@ profileButton.addEventListener('click', () => {
 });
 additionButton.addEventListener('click', () => {
   resetPopup(additionPopup);
-  formTypeAddPlaceValidator._resetErrors();
-  formTypeAddPlaceValidator._disableButton();
+  formTypeAddPlaceValidator.resetErrors();
+  formTypeAddPlaceValidator.disableButton();
   openPopup(additionPopup);
 });
 
