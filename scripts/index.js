@@ -1,4 +1,6 @@
+import { initialElements, validationConfig } from './data.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const popupList = document.querySelectorAll('.popup');
 
@@ -101,12 +103,12 @@ profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 additionFormElement.addEventListener('submit', handleAdditionFormSubmit);
 profileButton.addEventListener('click', () => {
   openProfilePopup(profilePopup);
-  resetErrors(profileFormElement, validationConfig);
+  formTypeEditValidator.resetErrors();
 });
 additionButton.addEventListener('click', () => {
   resetPopup(additionPopup);
-  resetErrors(additionFormElement, validationConfig);
-  disableButton(additionPopup.querySelector('.form__save-button'), validationConfig.inactiveButtonClass);
+  formTypeAddPlaceValidator._resetErrors();
+  formTypeAddPlaceValidator._disableButton();
   openPopup(additionPopup);
 });
 
@@ -118,3 +120,8 @@ popupList.forEach(popup => {
     }
   });
 });
+
+const formTypeEditValidator = new FormValidator(validationConfig, profileFormElement);
+const formTypeAddPlaceValidator = new FormValidator(validationConfig, additionFormElement);
+formTypeEditValidator.enableValidation();
+formTypeAddPlaceValidator.enableValidation();
