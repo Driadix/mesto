@@ -12,9 +12,9 @@ export default class UserInfo {
   }
 
   setUserInfo(userData) {
-    const { username, profession } = userData;
-    console.log(username);
-    this._username.textContent = username;
-    this._profession.textContent = profession;
+    const { name, job } = userData;
+    console.log(name);
+    this._username.textContent = name;
+    this._profession.textContent = job;
   }
 }

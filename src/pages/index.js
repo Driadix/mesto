@@ -29,13 +29,9 @@ import {
 
 const userInfo = new UserInfo(userConfig);
 
-function handleCardClick(name, link) {
-  popupTypeImage.open({ name, link });
-}
-
 const popupTypeEdit = new PopupWithForm({
-  handleFormSubmit: () => {
-    const userData = { username: profileNameInput.value, profession: profileJobInput.value };
+  handleFormSubmit: ({ name, job }) => {
+    const userData = { name, job };
     userInfo.setUserInfo(userData);
 
     popupTypeEdit.close();
@@ -46,12 +42,13 @@ popupTypeEdit.setEventListeners();
 
 profileButton.addEventListener('click', () => {
   formTypeEditValidator.resetErrors();
-  formTypeEditValidator.toggleButtonState();
 
   const userData = userInfo.getUserInfo();
 
   profileNameInput.value = userData.username;
   profileJobInput.value = userData.profession;
+
+  formTypeEditValidator.toggleButtonState();
 
   popupTypeEdit.open();
 });
@@ -59,8 +56,8 @@ profileButton.addEventListener('click', () => {
 // ------------- NEW PLACE POPUP -----------------
 
 const popupTypeNewPlace = new PopupWithForm({
-  handleFormSubmit: () => {
-    const cardInfo = { name: additionNameInput.value, link: additionLinkInput.value };
+  handleFormSubmit: ({ name, link }) => {
+    const cardInfo = { name, link };
     cards.addItem(createCard(cardInfo));
 
     popupTypeNewPlace.close();
@@ -84,8 +81,12 @@ popupTypeImage.setEventListeners();
 
 // ------------------- CARDS ----------------------------
 
+function handleCardClick(name, link) {
+  popupTypeImage.open({ name, link });
+}
+
 function createCard(item) {
-  const card = new Card(item, handleCardClick, '.element__template');
+  const card = new Card(item, handleCardClick, '#element__template');
   const cardElement = card.generateCard();
   return cardElement;
 }
