@@ -46,19 +46,13 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="form form_type_edit" action="#" name="profile-edit-form" novalidate>
-        <fieldset class="form__fieldset">
-          <label class="form__label">
-            <input class="input form__name-input" id="title-input" type="text" name="name" minlength="2" maxlength="40"
-              placeholder="Введите имя" required>
-            <span class="input-error title-input-error"></span>
-          </label>
-          <label class="form__label">
-            <input class="input form__job-input" id="job-input" type="text" name="job" minlength="2" maxlength="200"
-              placeholder="Введите вид деятельности" required>
-            <span class="input-error job-input-error"></span>
-          </label>
-          <button class="button form__save-button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
-        </fieldset>
+        <input class="input form__name-input" id="title-input" type="text" name="name" minlength="2" maxlength="40"
+          placeholder="Введите имя" required>
+        <span class="input-error title-input-error"></span>
+        <input class="input form__job-input" id="job-input" type="text" name="job" minlength="2" maxlength="200"
+          placeholder="Введите вид деятельности" required>
+        <span class="input-error job-input-error"></span>
+        <button class="button form__save-button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
       </form>
       <button class="button popup__close-button" type="button" aria-label="Закрыть форму"></button>
     </div>
@@ -68,19 +62,13 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="form form_type_new-place" action="#" name="profile-new-place-form" novalidate>
-        <fieldset class="form__fieldset">
-          <label class="form__label">
-            <input class="input form__name-input" id="name-input" type="text" name="name" minlength="2" maxlength="30"
-              placeholder="Название" required>
-            <span class="input-error name-input-error"></span>
-          </label>
-          <label class="form__label">
-            <input class="input form__job-input" id="url-input" type="url" name="link" placeholder="Ссылка на картинку"
-              required>
-            <span class="input-error url-input-error"></span>
-          </label>
-          <button class="button form__save-button" type="submit" aria-label="Создать">Создать</button>
-        </fieldset>
+        <input class="input form__name-input" id="name-input" type="text" name="name" minlength="2" maxlength="30"
+          placeholder="Название" required>
+        <span class="input-error name-input-error"></span>
+        <input class="input form__job-input" id="url-input" type="url" name="link" placeholder="Ссылка на картинку"
+          required>
+        <span class="input-error url-input-error"></span>
+        <button class="button form__save-button" type="submit" aria-label="Создать">Создать</button>
       </form>
       <button class="button popup__close-button" type="button" aria-label="Закрыть форму"></button>
     </div>
